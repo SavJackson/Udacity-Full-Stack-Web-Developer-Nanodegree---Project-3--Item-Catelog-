@@ -12,8 +12,6 @@ Modern web applications perform a variety of functions and provide amazing featu
 - How to develop a Restful web application using the Python framework Flask along with implementing third-party OAuth authentication. 
 - CRUD (create, read, update and delete) operations.
 
-
-
 # Prerequisites
 ---
  > Python
