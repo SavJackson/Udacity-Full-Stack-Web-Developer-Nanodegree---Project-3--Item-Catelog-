@@ -1,5 +1,5 @@
 # Item Catelog 
----
+
 #### Project Overview
 Develop an application that provides a list of items within a variety of categories as well as provide a user registration and authentication system. Registered users will have the ability to post, edit and delete their own items.
 
@@ -13,13 +13,15 @@ Modern web applications perform a variety of functions and provide amazing featu
 - CRUD (create, read, update and delete) operations.
 
 # Prerequisites
----
+
  > Python
  
 ### Built With 
 >[Flask Microframewrok](http://flask.pocoo.org/)
- [PostgreSql](https://www.postgresql.org/)
- [OAuth](https://oauth.net/code/python/)
+
+>[PostgreSql](https://www.postgresql.org/)
+
+>[OAuth](https://oauth.net/code/python/)
 
 ### Installing
 ##### Flask: 
@@ -30,14 +32,13 @@ pip install Flask
 
 
 # Development
----
+
 ## Issues
 
 ## Screenshots
-<img src= ScreenShots>
+<img src= Screen Shots/pic0>
 
-### Reference Links
----
+# Reference Links
 Flask:
 > https://vsupalov.com/flask-sqlalchemy-postgres/
 https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-iv-database
