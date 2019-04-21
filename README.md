@@ -36,7 +36,7 @@ pip install Flask
 ## Issues
 
 ## Screenshots
-<img src= Screen Shots/pic0>
+<img src="Screen Shots/pic0.jpg">
 
 # Reference Links
 Flask:
