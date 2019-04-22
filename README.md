@@ -37,7 +37,7 @@ pip install Flask
 Facebook Login: [Privacy Policy](https://www.termsfeed.com/blog/privacy-policy-url-facebook-app/
 ) is required for all Facebook apps before the app is authorized to appear live (in production). Too problematic to build a live app using FB for a class project, because you need actual verifiable URLs that are not in localhost.  FB apps in the Dev/Test environment support localhost but require that all developers/testers have access granted in advance of accessing the app.  Because of this, it's not possible to provide reviewers access in advance to test/validate the project.  Therefore I have opted only to provide OAuth authentication using Google, which provides an easier path to production with fewer restrictions.
 
-OAuth: The method of OAuth authentication in this project were handle on the front end. The authentication was only used to determine which user made what category, and if it could or could not edit and existing category or item. (see Example of Authentication screenshot)
+OAuth: The method of OAuth authentication in this project were handle on the front end. The authentication was only used to determine which user made what category and if it could or could not edit an existing category or item. (see Example of Authentication screenshot)
 
 ## Screenshots
 ## Database Model 
