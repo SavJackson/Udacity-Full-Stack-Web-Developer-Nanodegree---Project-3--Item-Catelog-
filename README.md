@@ -39,8 +39,6 @@ Facebook Login: [Privacy Policy](https://www.termsfeed.com/blog/privacy-policy-u
 
 OAuth: The method of OAuth authentication in this project were handle on the front end. The authentication was only used to determine which user made what category, and if it could or could not edit and existing category or item. (see Example of Authentication screenshot)
 
-## JSONs
-
 ## Screenshots
 ## Database Model 
 <img src="ScreenShots/database_model.jpg">
@@ -58,6 +56,16 @@ Each Category and Item has its own detail page 📃 the page is either in edit o
 
 #### Item Detail Page
 <img src="ScreenShots/pic3.jpg">
+
+## JSONs
+#### All Categories JSON
+<img src="ScreenShots/Category_ALL_JSON.jpg">
+
+#### All Users JSON
+<img src="ScreenShots/Users_JSON.jpg">
+
+#### All CategoryItem JSON
+<img src="ScreenShots/Category_Item_JSON.jpg">
 
 # Reference Links
 Flask:
