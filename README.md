@@ -64,6 +64,9 @@ Each Category and Item has its own detail page 📃 the page is either in edit o
 #### All Users JSON
 <img src="ScreenShots/Users_JSON.jpg">
 
+#### Arbitrary Item JSON
+<img src="ScreenShots/Item_JSON.jpg">
+
 #### All CategoryItem JSON
 <img src="ScreenShots/Category_Item_JSON.jpg">
 
