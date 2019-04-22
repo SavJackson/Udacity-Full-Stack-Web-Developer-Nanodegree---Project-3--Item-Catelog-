@@ -46,13 +46,19 @@ OAuth: The method of OAuth authentication in this project were handle on the fro
 <img src="ScreenShots/pic0.jpg">
 
 ### Example of Authentication
+These red boxes represent some of the authentication that went into this, only the created user of that spicific category or item may eidt or delete said object, otherwise the contents of the category or item are in a "view" mode.
 <img src="ScreenShots/pic1.jpg">
-Thre red boxes represent some of the authentication that went into this, only the created user of that spicific category or item may eidt or delete said object, otherwise the contents of the category or item are in a "view" mode.
+### Inside the Categories and Items
+Each Category and Item has its own detail page 📃 the page is either in edit or view mode dependeding on if it was created by the logged in user.
+#### Category Detail Page
+<img src="ScreenShots/pic3.jpg">
+#### Item Detail Page
+<img src="ScreenShots/pic3.jpg">
 
-## Future Additions
-[ ] 1. Fill up entire webpage
-
-[ ] 2. Make prettier
+## Future Additions 
+[ ] 1. Enable Facebook API Production 🔒
+[ ] 2. Fill up entire webpage 
+[ ] 3. Make prettier 🌸
 # Reference Links
 Flask:
 > https://vsupalov.com/flask-sqlalchemy-postgres/
