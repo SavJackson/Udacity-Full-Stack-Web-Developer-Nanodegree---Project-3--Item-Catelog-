@@ -47,10 +47,10 @@ OAuth: The method of OAuth authentication in this project were handle on the fro
 <img src="ScreenShots/pic0.jpg">
 
 ### Example of Authentication
-These red boxes represent some of the authentication that went into this, the currently logged in user may edit or delete the spicific Categories or Items they created otherwise the deatil pages in a "view" mode.
+These red boxes represent some of the authentication that went into this, the currently logged in user may edit or delete the specific Categories or Items they created otherwise the detail pages in a "view" mode.
 <img src="ScreenShots/pic1.jpg">
 ### Inside the Categories and Items
-Each Category and Item has its own detail page 📃 the page is either in edit or view mode dependeding on if it was created by the logged in user.
+Each Category and Item has its own detail page 📃 the page is either in edit or view mode depending on if it was created by the logged in user.
 #### Category Detail Page
 <img src="ScreenShots/pic3.jpg">
 
