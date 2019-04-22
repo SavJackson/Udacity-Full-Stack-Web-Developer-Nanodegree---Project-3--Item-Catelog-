@@ -1,5 +1,5 @@
 # Item Catelog 
----
+
 #### Project Overview
 Develop an application that provides a list of items within a variety of categories as well as provide a user registration and authentication system. Registered users will have the ability to post, edit and delete their own items.
 
@@ -8,20 +8,20 @@ Develop an application that provides a list of items within a variety of categor
 Modern web applications perform a variety of functions and provide amazing features and utilities to their users; but deep down, it’s really all just creating, reading, updating and deleting data. In this project, you’ll combine your knowledge of building dynamic websites with persistent data storage to create a web application that provides a compelling service to your users.
 
 
-### What Will I Learned?
+#### What I Learned?
 - How to develop a Restful web application using the Python framework Flask along with implementing third-party OAuth authentication. 
 - CRUD (create, read, update and delete) operations.
 
-
-
 # Prerequisites
----
+
  > Python
  
 ### Built With 
 >[Flask Microframewrok](http://flask.pocoo.org/)
- [PostgreSql](https://www.postgresql.org/)
- [OAuth](https://oauth.net/code/python/)
+
+>[PostgreSql](https://www.postgresql.org/)
+
+>[OAuth](https://oauth.net/code/python/)
 
 ### Installing
 ##### Flask: 
@@ -32,14 +32,13 @@ pip install Flask
 
 
 # Development
----
+
 ## Issues
 
 ## Screenshots
+<img src="Screen Shots/pic0.jpg">
 
-
-### Reference Links
----
+# Reference Links
 Flask:
 > https://vsupalov.com/flask-sqlalchemy-postgres/
 https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-iv-database
