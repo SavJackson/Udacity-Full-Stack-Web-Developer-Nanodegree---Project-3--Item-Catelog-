@@ -24,9 +24,10 @@ CLIENT_ID = json.loads(
     open('client_secrets.json', 'r').read())['web']['client_id']
 APPLICATION_NAME = "Item Catalog App"
 
-db = create_engine(database_file) 
+db = create_engine(database_file)
 Session = sessionmaker(db)
 session = Session()
+
 
 # Added for OAuth
 # Create anti-forgery state token
@@ -72,11 +73,11 @@ def fbconnect():
     # Use token to get user info from API
     userinfo_url = "https://graph.facebook.com/v2.8/me"
     '''
-        Due to the formatting for the result from the server token exchange we have to
-        split the token first on commas and select the first index which gives us the key : value
-        for the server access token then we split it on colons to pull out the actual token value
-        and replace the remaining quotes with nothing so that it can be used directly in the graph
-        api calls
+    Due to the formatting for the result from the server token exchange we
+    have to split the token first on commas and select the first index which
+    gives us the key : value for the server access token then we split it on
+    colons to pull out the actual token value and replace the remaining quotes
+    with nothing so that it can be used directly in the graph api calls
     '''
     tdata = json.loads(result)
     token = tdata['access_token']
@@ -131,7 +132,7 @@ def fbdisconnect():
     facebook_id = login_session['facebook_id']
     # The access token must me included to successfully logout
     access_token = login_session['access_token']
-    url = 'https://graph.facebook.com/%s/permissions?access_token=%s' % (facebook_id,access_token)
+    url = 'https://graph.facebook.com/%s/permissions?access_token=%s' % (facebook_id, access_token)
     h = httplib2.Http()
     result = h.request(url, 'DELETE')[1]
     return "you have been logged out"
@@ -284,9 +285,9 @@ def signout():
 # User Helper Functions
 def createUser(login_session):
     newUser = AppUser(userid=None,
-                   firstname=login_session['firstname'],
-                   lastname=login_session['lastname'],
-                   email=login_session['email'])
+                      firstname=login_session['firstname'],
+                      lastname=login_session['lastname'],
+                      email=login_session['email'])
 
     appUser = session.query(AppUser).filter_by(email=login_session['email']).one_or_none()
     if appUser is None:
@@ -298,13 +299,13 @@ def createUser(login_session):
 
 
 def getUserInfo(user_id):
-    apUser = session.query(User).filter_by(userid=user_id).one()
+    appUser = session.query(AppUser).filter_by(userid=user_id).one()
     return appUser
 
 
 def getUserID(email):
     try:
-        apUser = session.query(AppUser).filter_by(email=email).one()
+        appUser = session.query(AppUser).filter_by(email=email).one()
         return appUser.userid
     except:
         return None
@@ -323,28 +324,32 @@ def addCategory():
         CurrentUser = login_session['user_id']
 
     if request.method == 'POST':
-        newCategory = Category(categoryid=None, 
+        newCategory = Category(categoryid=None,
                                categoryname=request.form['categoryname'],
                                description=request.form['description'],
-                               dateadded=datetime.now(), 
+                               dateadded=datetime.now(),
                                userid=request.form['userid'])
         flash('New Category %s Successfully Created' % newCategory.categoryname)
         session.add(newCategory)
         session.commit()
         return redirect(url_for('showHomePage'))
     else:
-        return render_template('addCategory.html',IsLoggedIn=IsLoggedIn, CurrentUser=CurrentUser)
+        return render_template('addCategory.html',
+                               IsLoggedIn=IsLoggedIn,
+                               CurrentUser=CurrentUser)
+
 
 # Edit a Category
-@app.route('/category/<int:categoryid>/mode/<string:mode>/', methods=['GET', 'POST'])
+@app.route('/category/<int:categoryid>/mode/<string:mode>/',
+           methods=['GET', 'POST'])
 def editCategory(categoryid, mode):
     editedCategory = session.query(
         Category).filter_by(categoryid=categoryid).one()
 
     addedBy = session.query(AppUser).filter_by(userid=editedCategory.userid).one()
-    addedbyUser =  addedBy.lastname + ", " + addedBy.firstname
+    addedbyUser = addedBy.lastname + ", " + addedBy.firstname
     fmtDateAdded = datetime.strftime(editedCategory.dateadded, '%m/%d/%y %H:%M:%S')
-  
+
     if 'username' not in login_session:
         IsLoggedIn = False
         CurrentUser = None
@@ -367,19 +372,22 @@ def editCategory(categoryid, mode):
             flash('Category Successfully Edited %s' % editedCategory.categoryname)
             return redirect(url_for('showCategory', categoryid=request.form['categoryid']))
     else:
-        return render_template('editCategory.html', category=editedCategory, 
-                               addedby=addedbyUser, 
+        return render_template('editCategory.html', category=editedCategory,
+                               addedby=addedbyUser,
                                fmtDateAdded=fmtDateAdded,
-                               IsLoggedIn=IsLoggedIn, 
+                               IsLoggedIn=IsLoggedIn,
                                CurrentUser=CurrentUser, mode=mode)
 
+
 # Confirm deletion of a category
-# a seperate delete function is used to delete either 
+# a seperate delete function is used to delete either
 # category or item based on a 'deleteType parameter
 @app.route('/confirmDelCategory/<categoryid>/<deletionType>/')
 def confirmDelCategory(categoryid, deletionType):
     categoryToDelete = session.query(Category).filter_by(categoryid=categoryid).one()
-    return render_template('confirmDelCategory.html', category=categoryToDelete, deletionType=deletionType)    
+    return render_template('confirmDelCategory.html',
+                           category=categoryToDelete,
+                           deletionType=deletionType)
 
 
 # ===== Category Item Functions =====
@@ -395,7 +403,7 @@ def addItem(categoryid):
         CurrentUser = login_session['user_id']
 
     category = session.query(Category).filter_by(categoryid=categoryid).one()
-    
+
     if request.method == 'POST':
             newItem = CategoryItem(itemid=None,
                                    itemname=request.form['itemname'],
@@ -406,9 +414,17 @@ def addItem(categoryid):
             session.add(newItem)
             session.commit()
             flash('New Item %s Successfully Created' % (newItem.itemname))
-            return redirect(url_for('showCategory', categoryid=categoryid, IsLoggedIn=IsLoggedIn, CurrentUser=CurrentUser))
+            return redirect(url_for('showCategory',
+                            categoryid=categoryid,
+                            IsLoggedIn=IsLoggedIn,
+                            CurrentUser=CurrentUser))
     else:
-        return render_template('addItem.html', categoryid=categoryid, IsLoggedIn=IsLoggedIn, categoryname=category.categoryname, CurrentUser=CurrentUser)
+        return render_template('addItem.html',
+                               categoryid=categoryid,
+                               IsLoggedIn=IsLoggedIn,
+                               categoryname=category.categoryname,
+                               CurrentUser=CurrentUser)
+
 
 # Edit a category item
 @app.route('/category/<int:categoryid>/item/<int:itemid>/mode/<string:mode>/', methods=['GET', 'POST'])
@@ -452,7 +468,7 @@ def editItem(categoryid, itemid, mode):
 
 
 # Confirm deletion of a category
-# a seperate delete function is used to delete either 
+# a seperate delete function is used to delete either
 # category or item based on a 'deleteType parameter
 @app.route('/confirmDelCategory/<categoryid>/item/<int:itemid>/<deletionType>/')
 def confirmDelItem(categoryid, itemid, deletionType):
@@ -464,7 +480,9 @@ def confirmDelItem(categoryid, itemid, deletionType):
         CurrentUser = login_session['user_id']
 
     itemToDelete = session.query(CategoryItem).filter_by(itemid=itemid).one()
-    return render_template('confirmDelItem.html', item=itemToDelete, deletionType=deletionType)    
+    return render_template('confirmDelItem.html',
+                           item=itemToDelete,
+                           deletionType=deletionType)
 
 
 # Delete a item or a category after confirmation, this is called from a POST from confirm delete
@@ -474,26 +492,26 @@ def deleteItem():
         deletionType = request.form['deletionType']
         # determine what type of record we are deleting and then...
         # get itemid or category from hidden value of form
-        if deletionType=='Item':
+        if deletionType == 'Item':
             itemid = request.form['itemid']
             categoryid = request.form['categoryid']
             itemToDelete = session.query(CategoryItem).filter_by(itemid=itemid).one()
             session.delete(itemToDelete)
             session.commit()
-            flash('%s Successfully Deleted' % itemToDelete.itemname)     
+            flash('%s Successfully Deleted' % itemToDelete.itemname)
             return redirect(url_for('showCategory',
-                categoryid=request.form['categoryid']))
+                            categoryid=request.form['categoryid']))
         else:
             categoryid = request.form['categoryid']
             print("categoryid: %s" % categoryid)
             # delete all of the categories child items
             rows_deleted = session.query(CategoryItem).filter(CategoryItem.categoryid == categoryid).delete()
             # now delete the category
-            categoryToDelete = session.query(Category).filter_by(categoryid = categoryid).one()
+            categoryToDelete = session.query(Category).filter_by(categoryid=categoryid).one()
             session.delete(categoryToDelete)
             session.commit()
-            flash('%s Successfully Deleted' % categoryToDelete.categoryname) 
-        
+            flash('%s Successfully Deleted' % categoryToDelete.categoryname)
+
             return redirect(url_for('showHomePage'))
 
 
@@ -521,18 +539,20 @@ def showHomePage():
         recentitems = con.execute(qry)
 
     return render_template('homepage.html', categories=categories,
-                           recentitems=recentitems, IsLoggedIn=IsLoggedIn, CurrentUser=CurrentUser)
+                           recentitems=recentitems,
+                           IsLoggedIn=IsLoggedIn,
+                           CurrentUser=CurrentUser)
 
 
 @app.route('/showCategory/<int:categoryid>')
 def showCategory(categoryid):
-   
+
     categories = session.query(Category).all()
     tmpCategory = session.query(Category).filter_by(categoryid=categoryid).one()
     categoryname = tmpCategory.categoryname
     categoryaddedBy = tmpCategory.userid
     # return "This page will show all categories"
-    
+
     if 'username' not in login_session:
         IsLoggedIn = False
         CurrentUser = None
@@ -541,16 +561,15 @@ def showCategory(categoryid):
         CurrentUser = login_session['user_id']
 
     qry = text("""SELECT itemid, itemname, description, dateadded, categoryid, userid
-            FROM categoryitems 
-            Where categoryid = :x 
+            FROM categoryitems
+            Where categoryid = :x
             ORDER BY categoryitems.dateadded DESC""")
-            
+
     qry = qry.bindparams(bindparam("x", type_=types.INTEGER))
     with db.connect() as con:
         categoryItems = con.execute(qry, x=categoryid).fetchall()
 
-        
-    return render_template('showCategory.html', categories=categories, 
+    return render_template('showCategory.html', categories=categories,
                            categoryid=categoryid,
                            categoryname=categoryname,
                            categoryaddedBy=categoryaddedBy,
@@ -558,7 +577,7 @@ def showCategory(categoryid):
                            IsLoggedIn=IsLoggedIn,
                            CurrentUser=CurrentUser)
 
-   
+
 # === JSONs ===
 
 # Category on CategoryItems Table JSON
@@ -569,17 +588,27 @@ def categoryCategoryitemJSON(categoryid):
         categoryid=category.categoryid).all()
     return jsonify(CategoryItem=[i.serialize for i in items])
 
+
+# Category on CategoryItems Table JSON
+@app.route('/item/<int:itemid>/JSON')
+def CategoryitemJSON(itemid):
+    categoryitem = session.query(CategoryItem).filter_by(itemid=itemid).one()
+    return jsonify(CategoryItem=categoryitem.serialize)
+
+
 # User Table JSON
 @app.route('/users/JSON/')
 def userJSON():
     users = session.query(AppUser).all()
     return jsonify(users=[r.serialize for r in users])
 
+
 # Category Table JSON
 @app.route('/category/JSON/')
 def categoryJSON():
     categories = session.query(Category).all()
     return jsonify(users=[r.serialize for r in categories])
+
 
 if __name__ == '__main__':
     app.debug = True
