@@ -1,0 +1,45 @@
+<html>
+	<head>
+		<title class="title-style">Catalog</title>
+		<!-- <link rel="stylesheet" type="text/css" href="styles.css"> -->
+		<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+	</head>
+	<body>
+		<div class="topdiv-style" >
+			<table class="topdiv-tbl-style" >
+				<tr>
+					<td class="topdiv-tbl-col1-style" >Catalog App</td>
+					<td class="topdiv-tbl-col2-style" >
+					<input class="button-style" id="Button1" type="button" value="Login" />
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div class="bottom-div-style" >
+			&nbsp;
+			&nbsp;
+			<table class="bottom-div-tbl-style">
+				<tr>
+					<th class="bot-tbl-hdr">Delete Category</th>
+				</tr>
+				<tr>
+					<td>
+						<div>
+						<form action={{url_for('deleteItem')}} method="post">
+						<input type="hidden" name="deletionType" value ='{{deletionType}}'/>
+						<input type="hidden" name="categoryid" value ='{{category.categoryid}}'>
+						<label>Are you sure you want to delete?</label>  
+						<input type="submit" value="Submit"> 
+						</form>
+						</div>
+					</td>
+				</tr>
+			</table>
+			&nbsp;
+			&nbsp;
+			&nbsp;
+			&nbsp;
+			&nbsp;
+		</div>
+	</body>
+</html>

@@ -1,0 +1,175 @@
+<html>
+	<head>
+		<title class="title-style">Catalog</title>
+		<!-- <link rel="stylesheet" type="text/css" href="styles.css"> -->
+		<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+
+    <!--LOAD PRE-REQUISITES FOR GOOGLE SIGN IN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://apis.google.com/js/client:platform.js?onload=start" async defer></script>
+    <script>
+      function start() {
+        gapi.load('auth2', function() {
+          auth2 = gapi.auth2.init({
+            client_id: '398594652439-b77fbgb39u5qp61ip3r43vvoq1pv6l0d.apps.googleusercontent.com'
+          });
+        });
+      }
+    </script>
+
+    <!-- END PRE-REQUISITES FOR GOOGLE SIGN IN -->
+	</head>
+	<body>
+		<div class="topdiv-style" >
+			<table class="topdiv-tbl-style" >
+				<tr>
+					<td class="topdiv-tbl-col1-style" >Catalog App</td>
+					<td class="topdiv-tbl-col2-style" >&nbsp;</td>
+				</tr>
+			</table>
+    </div>
+    
+		<div class="bottom-div-style" >
+			&nbsp;
+			&nbsp;
+			<table class="bottom-div-tbl-style">
+				<thead >
+					<tr>
+						<th class="bot-tbl-hdr">Choose An Authentication Provider</th>
+					</tr>
+				</thead>
+				<tbody class="bot-tbl-body">
+          <tr>
+            <td>
+              <div>
+                <!--
+                  <div id="signinButton">
+                    <span class="g-signin"
+                      data-scope="openid email"
+                      data-clientid="398594652439-b77fbgb39u5qp61ip3r43vvoq1pv6l0d.apps.googleusercontent.com"
+                      data-redirecturi="postmessage"
+                      data-accesstype="offline"
+                      data-cookiepolicy="single_host_origin"
+                      data-callback="signInCallback"
+                      data-approvalprompt="force">
+                    </span>
+                  </div>
+
+                  <div id="result"></div>
+                -->  
+                  <tr>
+                    <td>
+                      <button id="signinButton" style="height:25px;width:175px">Login with Google</button>
+                    </td>
+                    <td>
+                      &nbsp;
+                    </td>
+                    <td>
+                      <!--
+                      <button>
+                              
+                              <fb:login-button 
+                                  scope="public_profile,email" 
+                                  onlogin="sendTokenToServer();">
+                                  <a href='javascript:sendTokenToServer()'>Login with Facebook</a>
+                              </fb:login-button>
+                      </button>
+                      -->
+                    </td>
+                  </tr>
+              </div>
+            </td>
+          </tr>
+				</tbody>
+			</table>
+			&nbsp;
+			&nbsp;
+			&nbsp;
+			&nbsp;
+			&nbsp;
+		</div>
+
+    <script>
+      $('#signinButton').click(function() {
+        function signInCallback(authResult){
+          if (authResult['code']){
+            $('#signinButton').attr('style', 'display: none');
+            $.ajax({
+              type: 'POST',
+              url: '/gconnect?state={{STATE}}',
+              headers: {
+              'X-Requested-With': 'XMLHttpRequest'
+              },
+              contentType: 'application/octet-stream; charset=utf-8',
+              success:function(result){
+                $('#result').html('Login Successful!</br>'+ result + '</br>Redirecting...')
+                    setTimeout(function() {
+                      window.location.href = "/";
+                    }, 2000);
+              },
+              processData:false,
+              data:authResult['code']
+            });
+          } else{
+            // handle error
+            console.log('There was an error: ' + authResult['error']);
+            $('#result').html('Failed to make a server-side call. Check your configuration and console.');
+          }
+        }
+        auth2.grantOfflineAccess().then(signInCallback);
+      });
+    </script>
+
+    <!--FACEBOOK SIGN IN -->
+    <script>
+      window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '267335297550370',
+        cookie     : true,  // enable cookies to allow the server to access 
+                            // the session
+        xfbml      : true,  // parse social plugins on this page
+        version    : 'v2.4' // use version 2.4
+      });
+
+      };
+
+    // Load the SDK asynchronously
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+
+      // Here we run a very simple test of the Graph API after login is
+      // successful.  See statusChangeCallback() for when this call is made.
+      function sendTokenToServer() {
+        var access_token = FB.getAuthResponse()['accessToken'];
+        console.log(access_token)
+        console.log('Welcome!  Fetching your information.... ');
+        FB.api('/me', function(response) {
+          console.log('Successful login for: ' + response.name);
+        $.ajax({
+          type: 'POST',
+          url: '/fbconnect?state={{STATE}}',
+          processData: false,
+          data: access_token,
+          contentType: 'application/octet-stream; charset=utf-8',
+          success: function(result) {
+            // Handle or verify the server response if necessary.
+            if (result) {
+              $('#result').html('Login Successful!</br>'+ result + '</br>Redirecting...')
+            setTimeout(function() {
+              window.location.href = "/";
+            }, 4000);
+            } else {
+              $('#result').html('Failed to make a server-side call. Check your configuration and console.');
+              }
+          }
+      });
+        });
+      }
+    </script>
+	</body>
+</html>

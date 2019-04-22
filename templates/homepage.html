@@ -1,0 +1,80 @@
+<html>
+	<head>
+		<title class="title-style">Catalog</title>
+		<!-- <link rel="stylesheet" type="text/css" href="styles.css"> -->
+		<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+	</head>
+	<body>
+		<div class="topdiv-style" >
+			<table class="topdiv-tbl-style" >
+				<tr>
+					<td class="topdiv-tbl-col1-style" >Catalog App </td>
+					<td class="topdiv-tbl-col2-style" >
+						{% if IsLoggedIn == True %}  
+						<input onclick="location.href = '{{url_for('signout')}}';" class="button-style" id="Button1" type="button" value="Signout" />.					
+	 					{% else %}  
+						<input onclick="location.href = '{{url_for('showLogin')}}';" class="button-style" id="Button1" type="button" value="Login" />
+	 					{% endif %}  
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div class="bottom-div-style" >
+			&nbsp;
+			&nbsp;
+			<table class="bottom-div-tbl-style">
+					<tr>							
+						{% if IsLoggedIn == True %} <!-- Logged in  -->
+							
+						<td class="bot-tbl-hdr" width='24%'>Categories </td>							
+						<td width='24%'><a href="{{url_for('addCategory')}}"><img class="link-img-style" src={{url_for('static', filename='add.png')}}></a></td>
+						<td rowspan="2" width='4%' align="center"> <hr class='hr-style'>  </td>
+						<td class="bot-tbl-hdr" width='24%'> Most Recent Items</td>						
+						<td width='24%' >&nbsp;</td>					
+							
+						{% else %}	<!-- Not Logged in -->
+
+						<td class="bot-tbl-hdr" width='24%'>Categories </td>
+						<td width='24%'>&nbsp;</td>			
+						<td rowspan="2" width='4%' align="center"> <hr class='hr-style'>  </td>			
+						<td class="bot-tbl-hdr" width='24%'> Most Recent Items</td>	
+						<td width='24%' >&nbsp;</td>	
+						
+						{% endif %}
+
+					</tr>
+				</tr>
+				<tr>
+					<td valign="top" colspan="2">
+					<table style="width:100%;">
+						{% for category in categories %}
+
+							<tr>
+								<td class="left-tbl-col1"><a href="{{url_for('showCategory', categoryid=category.categoryid)}}"> {{category.categoryname}} </a> </td>
+							
+							</tr>
+
+						{% endfor %}
+
+					</table></td>
+					<td valign="top" colspan="2">
+					<table style="width:100%;">
+						{% for recent in recentitems %}
+
+							<tr>
+								<td ><span class="right-tbl-col1">{{recent.itemname}}</span><span class="right-tbl-col2">&nbsp;({{recent.categoryname}})</span></td>
+							</tr>
+
+						{% endfor %}
+
+					</table></td>
+				</tr>
+			</table>
+			&nbsp;
+			&nbsp;
+			&nbsp;
+			&nbsp;
+			&nbsp;
+		</div>
+	</body>
+</html>

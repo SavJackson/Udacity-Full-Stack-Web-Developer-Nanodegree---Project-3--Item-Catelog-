@@ -1,0 +1,90 @@
+<html>
+	<head>
+		<title class="title-style">Catalog</title>
+		<!-- <link rel="stylesheet" type="text/css" href="styles.css"> -->
+		<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+	</head>
+	<body>
+		<div class="topdiv-style" >
+			<table class="topdiv-tbl-style" >
+				<tr>
+					<td class="topdiv-tbl-col1-style" width="20%">Catalog App</td>
+					<td class="topdiv-tbl-col1-style" width="5%"><a href ="{{url_for('showHomePage')}}"><img src={{url_for('static', filename='home.png')}} style='width:20px;height:20px;border:none;display:block;'></a></td>
+					<td class="topdiv-tbl-col1-style" width="60%">&nbsp;</td>
+					<td class="topdiv-tbl-col2-style" width="15%">
+					{% if IsLoggedIn == True %}  
+						<input onclick="location.href = '{{url_for('signout') }}';" class="button-style" id="Button1" type="button" value="Signout" />.					
+					{% else %}  
+						<input onclick="location.href = '{{url_for('showLogin') }}';" class="button-style" id="Button1" type="button" value="Login" />
+					{% endif %}  
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div class="bottom-div-style" >
+			&nbsp;
+			&nbsp;
+			<table class="bottom-div-tbl-style">
+				<thead >
+					<tr>
+						<th class="bot-tbl-hdr">Item Detail</th>
+					</tr>
+				</thead>
+				<tbody class="bot-tbl-body">
+<tr><td><div>
+
+{% if IsLoggedIn == True and mode=='edit' %} <!--  loggged in edit mode -->
+
+<form action={{url_for('editItem', categoryid=categoryid, itemid=itemid, mode=mode) }} method="post">
+	<input type="hidden" name="itemid" value ='{{item.itemid}}'/>
+	<input type="hidden" name="userid" value ='{{item.userid}}'/>
+	<input type="hidden" name="categoryid" value ='{{categoryid}}'/>		
+	Item name:<br>
+	<input type="text" name="itemname" value ='{{item.itemname}}'/> <br><br>
+	Description:<br>
+	<textarea rows="4" cols="50" name="description">{{item.description}}</textarea><br><br>
+	Category:<br>
+	<input class='read-only-style' readonly type="text" name="categoryname" value ='{{category.categoryname}}'/><br><br>
+	Added By:<br>
+	<input class='read-only-style' readonly type="text" name="addedby" value ='{{addedby}}'><br><br>
+   	Date Added:<br>
+	<input class='read-only-style' readonly type="text" name="dateadded" value ='{{ fmtDateAdded }}'/><br><br>
+  <input type="submit" value="Submit"> 
+</form>
+
+{% else %} <!-- not loggged in or in view mode -->
+
+<form action={{url_for('showCategory',categoryid=categoryid) }} method="GET">
+	<input type="hidden" name="itemid" value ='{{item.itemid}}'/>
+	<!-- category -->
+	<input type="hidden" name="categoryid"  value ='{{item.categoryid}}'>
+	<!-- added by -->
+	<input type="hidden" name="userid" value ='{{item.userid}}'>
+
+	Item name:<br>
+	<input class='read-only-style' type="text" name="itemname"  value ='{{item.itemname}}' readonly/> <br><br>
+	Description:<br>
+	<textarea class='read-only-style' rows="4" cols="50" name="description" readonly>{{item.description}}</textarea><br><br>
+	Category:<br>
+	<input class='read-only-style' readonly type="text" name="categoryid" value ='{{category.categoryname}}'/><br><br>
+	Added By:<br>
+	<input class='read-only-style' readonly type="text" name="addedby" value ='{{addedby}}'><br><br>	
+   	Date Added:<br> 
+	<input class='read-only-style' type="text" name="dateadded" value ='{{ fmtDateAdded }}' readonly/><br><br>
+  	<input type="submit" value="Go Back"> 
+  
+ {% endif %}
+</form>
+</div></td></tr>
+	
+			</tbody>
+
+			</table>
+			&nbsp;
+			&nbsp;
+			&nbsp;
+			&nbsp;
+			&nbsp;
+		</div>
+	</body>
+</html>

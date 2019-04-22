@@ -1,0 +1,168 @@
+<html>
+	<head>
+		<title class="title-style">Catalog</title>
+		<!-- <link rel="stylesheet" type="text/css" href="styles.css"> -->
+		<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+	</head>
+	<body>
+		<div class="topdiv-style" >
+			<table class="topdiv-tbl-style" >
+				<tr>
+					<td class="topdiv-tbl-col1-style" width="20%">Catalog App</td>
+					<td class="topdiv-tbl-col1-style" width="5%"><a href ="{{url_for('showHomePage')}}"><img src={{url_for('static', filename='home.png')}} style='width:20px;height:20px;border:none;display:block;'></a></td>
+					<td class="topdiv-tbl-col1-style" width="60%">&nbsp;</td>
+					<td class="topdiv-tbl-col2-style" width="15%">
+					{% if IsLoggedIn == True %}  
+						<input onclick="location.href = '{{url_for('signout') }}';" class="button-style" id="Button1" type="button" value="Signout" />.					
+					{% else %}  
+						<input onclick="location.href = '{{url_for('showLogin') }}';" class="button-style" id="Button1" type="button" value="Login" />
+					{% endif %}  
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div class="bottom-div-style" >
+			&nbsp;
+			&nbsp;
+			<table class="bottom-div-tbl-style">
+					<tr>							
+						{% if IsLoggedIn == True %} <!-- Logged in  -->
+							
+						<td  class='bot-tbl-hdr' width='24%'>Categories </td>							
+		
+						<td width='24%'>&nbsp;</td>
+						
+						<td rowspan="2" width='4%' align="center"> <hr class='hr-style'>  </td>
+						
+						<td class='bot-tbl-hdr' width='24%'>Items in: {{categoryname}}</td>					
+							<!-- Logged in user can only add to this category if they created it -->
+							{% if CurrentUser == categoryaddedBy %}
+								<td  class='bot-tbl-hdr' width='24%' align="right"> <a href="{{url_for('addItem',categoryid=categoryid)}}"><img class="link-img-style" src={{url_for('static', filename='add.png')}}></td>					
+							{% else %}
+								<td width='24%' >&nbsp;</td>
+							{% endif %}	
+
+						{% else %}	<!-- Not Logged in -->
+
+						<td  class='bot-tbl-hdr'  width='24%'>Categories </td>
+						<td width='24%'>&nbsp;</td>			
+						<td rowspan="2" width='4%' align="center"><hr class='hr-style'></td>			
+						<td  class='bot-tbl-hdr' width='24%'>Items in: {{categoryname}}</td>	
+						<td width='24%' >&nbsp;</td>	
+						
+						{% endif %}
+
+					</tr>
+			
+					<tr>
+						
+						<td valign="top" colspan="2" style="width:48%;text-align: left">
+							<table style="width:100%;">
+
+								{% for category in categories %}
+								
+									{% if IsLoggedIn == True %}
+									
+										<!-- Can edit the category if this user created it-->   
+										<tr>
+											
+											{% if categoryid == category.categoryid %}
+											
+											<td class="left-tbl-col1-sel"><a href="{{url_for('showCategory', categoryid=categoryid)}}">{{category.categoryname}} </a> </td>
+
+											{% else %}		
+
+											<td class="left-tbl-col1"><a href="{{url_for('showCategory', categoryid=category.categoryid)}}">{{category.categoryname}} </a> </td>
+
+											{% endif %}
+
+											
+
+										{% if CurrentUser == category.userid %}
+										
+
+											
+											<!-- this user created it, show edit icon and delete icons, the edit page will control display-->
+											
+											<td><a href ="{{url_for('editCategory', categoryid=category.categoryid, mode='edit')}}"> <img class="link-img-style" src={{url_for('static', filename='edit.png')}}></a></td> 
+											<td><a href ="{{url_for('confirmDelCategory', categoryid=categoryid, deletionType='Category')}}"> <img class="link-img-style" src={{url_for('static', filename='delete.png')}}></a></td>
+
+										
+
+											{% else %}
+
+											<!-- this user DID NOT create, show view icon, the edit page will control display-->
+											<td><a href ="{{url_for('editCategory', categoryid=category.categoryid, mode='view')}}"> <img class="link-img-style" src={{url_for('static', filename='view.png')}}></a></td> 
+											<td>&nbsp;</td>									
+											{% endif %}
+										
+										</tr>
+									{% else %} 
+										<!-- Can't edit the category, show lock/view icon, the edit page will control display-->  
+										<tr>
+												{% if categoryid == category.categoryid %}
+											
+												<td class="left-tbl-col1-sel"><a href="{{url_for('showCategory', categoryid=category.categoryid)}}">{{category.categoryname}} </a> </td>
+	
+												{% else %}		
+	
+												<td class="left-tbl-col1"><a href="{{url_for('showCategory', categoryid=category.categoryid)}}">{{category.categoryname}} </a> </td>
+	
+												{% endif %}
+
+												
+
+											<td><a href ="{{url_for('editCategory', categoryid=category.categoryid, mode='view')}}"> <img class='link-img-style' src={{url_for('static', filename='view.png')}}></a></td> 
+											<td>&nbsp;</td>
+										</tr>
+									{% endif %} 
+								{% endfor %}
+								
+									
+							</table>
+						</td>
+						<!--<td width='4%'></td>-->
+						<td valign="top" colspan="2" style="width:48%;text-align: left">
+							
+							<table style="width:100%" >
+									{% for item in categoryItems %}
+									{% if IsLoggedIn == True %} 
+										<!-- Can edit the items if the user created the category-->   
+										{% if CurrentUser == item.userid %}
+											
+											<!-- Can edit the category if this user created it-->   
+											<tr>
+												<td class="right-tbl-col-norm">{{item.itemname}} </td>
+												<td><a href ="{{url_for('editItem', categoryid=categoryid, itemid=item.itemid, mode='edit')}}"> <img  class='link-img-style' src={{url_for('static', filename='edit.png')}}></a></td> 
+												<td><a href ="{{url_for('confirmDelItem', categoryid=categoryid, itemid=item.itemid, deletionType='Item')}}"> <img  class='link-img-style' src={{url_for('static', filename='delete.png')}}></a></td> 
+											</tr>
+										{% else %}
+											<!-- User logged in but didn't create this category and cant edit or delete it, the page will control the view/edit display-->   
+											<tr>
+												<td class="right-tbl-col-norm">{{item.itemname}}</td>
+												<td><a href ="{{url_for('editItem', categoryid=categoryid, itemid=item.itemid, mode='view')}}"> <img  class='link-img-style' src={{url_for('static', filename='view.png')}}></a></td> 
+												<td>&nbsp;</td> 
+											</tr>
+										{% endif %}
+									{% else %}
+									<tr>
+										<!-- Can't edit the item, show view icon, the edit page will control display-->
+										<td class="right-tbl-col-norm">{{item.itemname}}</td>
+										<td><a href ="{{url_for('editItem', categoryid=categoryid, itemid=item.itemid, mode='view')}}"> <img  class='link-img-style' src={{url_for('static', filename='view.png')}}></a></td> 
+										<td>&nbsp;</td>
+									</tr>								  
+									{% endif %}
+								{% endfor %}
+							</table>
+						</td>
+					
+					</tr>
+			</table>
+			&nbsp;
+			&nbsp;
+			&nbsp;
+			&nbsp;
+			&nbsp;
+		</div>
+	</body>
+</html>

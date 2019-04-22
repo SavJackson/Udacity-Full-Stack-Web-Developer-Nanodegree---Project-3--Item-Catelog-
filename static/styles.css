@@ -1,0 +1,127 @@
+.title-style {
+	background-color: #000080;	
+}
+.topdiv-style {
+	background-color: #000080;
+	text-align: center
+}
+.topdiv-tbl-style {	
+	width:700px;
+	vertical-align: middle;
+	border: 0;
+	margin: 0 auto;
+}
+.topdiv-tbl-col1-style {	
+	text-align: left; 
+	background-color: #000080; 
+	color: #FFFFFF; 
+	font-size: 15pt;
+	font-weight: bolder; 
+	font-family: Arial;
+}
+.topdiv-tbl-col2-style {
+	text-align: right; 
+	background-color: #000080; 
+	color: #FFFFFF; 
+	font-size: 12pt;
+	font-weight: bolder; 
+	font-family: Arial;
+}
+.link-img-style {
+	height: 20px; 
+	width: 20px;
+}
+.button-style {
+	font-size: small; 
+	font-weight: bold; 
+	color: #FFFFFF; 
+	background-color: #FF6600;
+}
+.bottom-div-style {	
+	background-color: #00FFFF;
+}
+.bottom-div-tbl-style {	
+	width:700px; 
+	background-color: #FFFFFF; 
+	margin: 0 auto;
+	font-size: 12pt;
+}
+
+.bot-tbl-hdr {
+	text-align: left; 
+	font-size: 14pt; 
+	color: olive; 
+	font-weight: bold;	
+	
+}
+
+.hr-style {
+	width:3px;
+	height:250px;
+	background-color: #00FFFF;
+}
+/*
+.bot-tbl-body {
+	font-size: small; 
+	font-weight: bold; 
+	color: #FF0000;	
+	
+}
+*/
+.left-tbl-col1 {
+	font-size: 12pt; 
+	font-family: Arial; 
+	font-weight: bold;
+	
+}
+.left-tbl-col1-sel {
+	font-size: 12pt; 
+	font-family: Arial; 
+	font-weight: bold;
+	background-color: lightgrey
+	
+}
+
+.right-tbl-col1{
+	font-size: 12pt; 
+	font-family: Arial; 
+	font-weight: bold; 
+	color: #FF0000;
+}
+.right-tbl-col2{
+	font-size: 12pt; 
+	font-family: Arial; 
+	font-weight: bold; 
+	color: #96acd1;
+	font-style: italic;
+}
+.right-tbl-col-norm{
+	font-size: 12pt; 
+	font-family: Arial; 
+	font-weight: bold; 
+	margin: 0 auto;
+}
+
+.read-only-style{
+	background-color: lightgrey;
+	border-style: inset;
+	border-color: lightgrey
+	border-width: 1px
+}
+
+/*
+.vert-line {
+	border-left: 6px solid rgb(0, 0, 0);
+	height: 500px;
+	position: absolute;
+	left: 50%;
+	margin-left: -3px;
+	top: 0;
+  }
+.selected-line {
+	font-size: xx-large; 
+	font-weight: bold; 
+	color: #000080;
+	font-style: italic;	
+  }
+*/
