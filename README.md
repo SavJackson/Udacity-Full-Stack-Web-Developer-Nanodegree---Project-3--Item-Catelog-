@@ -36,17 +36,23 @@ pip install Flask
 ## Issues
 Facebook Login: The Facebook login button has been disable due to the APIs terms and condition requirments not allowing the application to be set foruth into production therfore this project had to be done within the development position (dev-mode). While in dev mode the users had to be pre-defiend. This functionallity was removed for the reveiwer because there is no way to know who the review is before submission. 
 
-OAuth: The method of OAuth authentication in this project were handle on the front end. The authentication was only used to determine which user made what category, and if it could or could not edit and existing category or item.
+OAuth: The method of OAuth authentication in this project were handle on the front end. The authentication was only used to determine which user made what category, and if it could or could not edit and existing category or item. (see Example of Authentication screenshot)
 
 ## Screenshots
 ## Database Model 
 <img src="ScreenShots/database_model.jpg">
 
 ### Website Homepage
+<img src="ScreenShots/pic0.jpg">
 
+### Example of Authentication
+<img src="ScreenShots/pic1.jpg">
+Thre red boxes represent some of the authentication that went into this, only the created user of that spicific category or item may eidt or delete said object, otherwise the contents of the category or item are in a "view" mode.
 
 ## Future Additions
+[ ] 1. Fill up entire webpage
 
+[ ] 2. Make prettier
 # Reference Links
 Flask:
 > https://vsupalov.com/flask-sqlalchemy-postgres/
