@@ -36,7 +36,7 @@ class AppUser(db.Model):
             'firstname': self.firstname,
             'lastname': self.lastname,
             'email': self.email
-        }    
+        }
 
 
 class Category(db.Model):
@@ -47,11 +47,12 @@ class Category(db.Model):
     dateadded = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     userid = db.Column(db.Integer, index=True, unique=False)
 
-    def __init__(self, categoryid, categoryname, description, dateadded, userid):
+    def __init__(self, categoryid, categoryname, description,
+                 dateadded, userid):
         self.categoryid = categoryid
         self.categoryname = categoryname
         self.description = description
-        self.dateadded =dateadded
+        self.dateadded = dateadded
         self.userid = userid
 
     def __repr__(self):
@@ -86,7 +87,6 @@ class CategoryItem(db.Model):
         self.dateadded = dateadded
         self.categoryid = categoryid
         self.userid = userid
-
 
     def __repr__(self):
         return 'CategoryItem {}>'.format(self.itemname)
