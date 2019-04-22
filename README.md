@@ -59,15 +59,19 @@ Each Category and Item has its own detail page 📃 the page is either in edit o
 
 ## JSONs
 #### All Categories JSON
+API Link:http://localhost:5000/category/JSON
 <img src="ScreenShots/Category_ALL_JSON.jpg">
 
 #### All Users JSON
+API Link:http://localhost:5000/users/JSON
 <img src="ScreenShots/Users_JSON.jpg">
 
 #### Arbitrary Item JSON
+API Link:http://localhost:5000/item/1/JSON
 <img src="ScreenShots/Item_JSON.jpg">
 
 #### All CategoryItem JSON
+API Link:http://localhost:5000/category/1/categoryitem/JSON
 <img src="ScreenShots/Category_Item_JSON.jpg">
 
 # Reference Links
