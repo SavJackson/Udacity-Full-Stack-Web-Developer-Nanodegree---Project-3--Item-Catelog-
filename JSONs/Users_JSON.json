@@ -1,0 +1,22 @@
+{
+  "users": [
+    {
+      "email": "savion.dev@gmail.com", 
+      "firstname": "Savion", 
+      "lastname": "Jackson", 
+      "userid": 1
+    }, 
+    {
+      "email": "savionjackson72@gmail.com", 
+      "firstname": "Alexander", 
+      "lastname": "Jackson", 
+      "userid": 2
+    }, 
+    {
+      "email": "savionjobs@gmail.com", 
+      "firstname": "Saybo", 
+      "lastname": "Jackson", 
+      "userid": 3
+    }
+  ]
+}

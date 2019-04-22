@@ -1,0 +1,28 @@
+{
+  "CategoryItem": [
+    {
+      "categoryid": 1, 
+      "dateadded": "Sun, 21 Apr 2019 16:19:38 GMT", 
+      "description": "A remarkably bright workaholic", 
+      "itemid": 3, 
+      "itemname": "Border Collie", 
+      "userid": 1
+    }, 
+    {
+      "categoryid": 1, 
+      "dateadded": "Sun, 21 Apr 2019 16:19:38 GMT", 
+      "description": "medium-large breed of domestic dog that was originally developed around 1890", 
+      "itemid": 2, 
+      "itemname": "Dobermann Pincher", 
+      "userid": 1
+    }, 
+    {
+      "categoryid": 1, 
+      "dateadded": "Sun, 21 Apr 2019 16:19:38 GMT", 
+      "description": "medium to large-sized working dog that originated in Germany", 
+      "itemid": 1, 
+      "itemname": "German Shepherd", 
+      "userid": 1
+    }
+  ]
+}
