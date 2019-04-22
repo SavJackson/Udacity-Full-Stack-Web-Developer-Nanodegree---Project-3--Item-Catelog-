@@ -52,13 +52,17 @@ These red boxes represent some of the authentication that went into this, only t
 Each Category and Item has its own detail page 📃 the page is either in edit or view mode dependeding on if it was created by the logged in user.
 #### Category Detail Page
 <img src="ScreenShots/pic3.jpg">
+
 #### Item Detail Page
 <img src="ScreenShots/pic3.jpg">
 
 ## Future Additions 
 [ ] 1. Enable Facebook API Production 🔒
+
 [ ] 2. Fill up entire webpage 
+
 [ ] 3. Make prettier 🌸
+
 # Reference Links
 Flask:
 > https://vsupalov.com/flask-sqlalchemy-postgres/
