@@ -1,14 +1,14 @@
 # Item Catelog 
 
-#### Project Overview
+## Project Overview
 Develop an application that provides a list of items within a variety of categories as well as provide a user registration and authentication system. Registered users will have the ability to post, edit and delete their own items.
 
 
-#### Why This Project?
+## Why This Project?
 Modern web applications perform a variety of functions and provide amazing features and utilities to their users; but deep down, it’s really all just creating, reading, updating and deleting data. In this project, you’ll combine your knowledge of building dynamic websites with persistent data storage to create a web application that provides a compelling service to your users.
 
 
-#### What I Learned?
+## What I Learned?
 - How to develop a Restful web application using the Python framework Flask along with implementing third-party OAuth authentication. 
 - CRUD (create, read, update and delete) operations.
 
@@ -16,7 +16,7 @@ Modern web applications perform a variety of functions and provide amazing featu
 
  > Python
  
-### Built With 
+## Built With 
 >[Flask Microframewrok](http://flask.pocoo.org/)
 
 >[PostgreSql](https://www.postgresql.org/)
@@ -34,9 +34,18 @@ pip install Flask
 # Development
 
 ## Issues
+Facebook Login: The Facebook login button has been disable due to the APIs terms and condition requirments not allowing the application to be set foruth into production therfore this project had to be done within the development position (dev-mode). While in dev mode the users had to be pre-defiend. This functionallity was removed for the reveiwer because there is no way to know who the review is before submission. 
+
+OAuth: The method of OAuth authentication in this project were handle on the front end. The authentication was only used to determine which user made what category, and if it could or could not edit and existing category or item.
 
 ## Screenshots
-<img src="ScreenShots/pic0.jpg">
+## Database Model 
+<img src="ScreenShots/database_model.jpg">
+
+### Website Homepage
+
+
+## Future Additions
 
 # Reference Links
 Flask:
